@@ -27,6 +27,7 @@ vim.pack.add({
 
 	"https://github.com/mfussenegger/nvim-jdtls",
 	"https://github.com/linux-cultist/venv-selector.nvim",
+	"https://github.com/jake-stewart/multicursor.nvim",
 })
 
 require("core.keymaps")
@@ -45,6 +46,7 @@ require("plugins.mini")
 require("plugins.gitsigns")
 require("plugins.mason")
 require("plugins.venv-selector")
+require("plugins.multicursor")
 
 require("ui.colorscheme")
 require("ui.statuline")

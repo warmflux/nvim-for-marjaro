@@ -48,6 +48,10 @@
       "rev": "264b5c8fc6e82212af0dc5c345145cfa916efeb6",
       "src": "https://www.github.com/echasnovski/mini.nvim"
     },
+    "multicursor.nvim": {
+      "rev": "704b99f10a72cc05d370cfeb294ff83412a8ab55",
+      "src": "https://github.com/jake-stewart/multicursor.nvim.git"
+    },
     "nvim": {
       "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim"
