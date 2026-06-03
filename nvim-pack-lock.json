@@ -80,6 +80,10 @@
       "rev": "896d4515a7193676aacf8a95239882397fdd6b27",
       "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
+    "opencode.nvim": {
+      "rev": "6eabb12f1afba7c19f511c95ab356ed4fa5ec60f",
+      "src": "https://github.com/nickjvandyke/opencode.nvim.git"
+    },
     "venv-selector.nvim": {
       "rev": "a46c77978abc1aa1b3e17918d964bd30287abb42",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"

@@ -1,9 +1,9 @@
 vim.pack.add({
-	"https://github.com/catppuccin/nvim",
+	"https://github.com/catppuccin/nvim", -- colorschem
 	"https://www.github.com/lewis6991/gitsigns.nvim",
 	"https://www.github.com/echasnovski/mini.nvim",
-	"https://www.github.com/ibhagwan/fzf-lua",
-	"https://www.github.com/nvim-tree/nvim-tree.lua",
+	"https://www.github.com/ibhagwan/fzf-lua", -- search
+	"https://www.github.com/nvim-tree/nvim-tree.lua", -- file explore
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
 		branch = "main",
@@ -18,16 +18,19 @@ vim.pack.add({
 	"https://www.github.com/hrsh7th/cmp-cmdline",
 	"https://github.com/saadparwaiz1/cmp_luasnip",
 	"https://www.github.com/rafamadriz/friendly-snippets",
-
 	"https://www.github.com/neovim/nvim-lspconfig",
-	"https://github.com/mason-org/mason.nvim",
 	"https://github.com/creativenull/efmls-configs-nvim",
 	"https://github.com/L3MON4D3/LuaSnip",
-	"https://github.com/obsidian-nvim/obsidian.nvim",
 
-	"https://github.com/mfussenegger/nvim-jdtls",
-	"https://github.com/linux-cultist/venv-selector.nvim",
-	"https://github.com/jake-stewart/multicursor.nvim",
+	"https://github.com/mason-org/mason.nvim", -- market
+	"https://github.com/obsidian-nvim/obsidian.nvim", -- md
+
+	"https://github.com/mfussenegger/nvim-jdtls", -- java lsp
+	"https://github.com/linux-cultist/venv-selector.nvim", -- py select venv
+	"https://github.com/jake-stewart/multicursor.nvim", -- multicursors
+
+	-- ai
+	"https://github.com/nickjvandyke/opencode.nvim", -- opencode
 })
 
 require("core.keymaps")
@@ -47,6 +50,7 @@ require("plugins.gitsigns")
 require("plugins.mason")
 require("plugins.venv-selector")
 require("plugins.multicursor")
+require("plugins.opencode")
 
 require("ui.colorscheme")
 require("ui.statuline")
