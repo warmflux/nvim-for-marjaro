@@ -274,6 +274,7 @@ do
 
 	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
+	local ruff = require("efmls-configs.formatters.ruff")
 
 	local prettier_d = require("efmls-configs.formatters.prettier_d")
 	local eslint_d = require("efmls-configs.linters.eslint_d")
@@ -323,7 +324,8 @@ do
 				jsonc = { eslint_d, fixjson },
 				lua = { stylua },
 				markdown = { prettier_d },
-				python = { flake8, black },
+				-- python = { flake8, black },
+				python = { ruff },
 				sh = { shellcheck, shfmt },
 				typescript = { eslint_d, prettier_d },
 				typescriptreact = { eslint_d, prettier_d },
