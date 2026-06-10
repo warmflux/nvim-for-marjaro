@@ -17,7 +17,7 @@ local config = {
 			home = os.getenv("JAVA_HOME"),
 
 			maven = {
-				userSettings = "/home/feng/.m2/settings.xml",
+				userSettings = home .. "/.m2/settings.xml",
 				downloadSources = true,
 			},
 		},
