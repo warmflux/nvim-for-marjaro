@@ -26,7 +26,6 @@ vim.pack.add({
 	"https://github.com/mason-org/mason.nvim", -- market
 	"https://github.com/obsidian-nvim/obsidian.nvim", -- md
 
-	"https://github.com/mfussenegger/nvim-jdtls", -- java lsp
 	"https://github.com/linux-cultist/venv-selector.nvim", -- py select venv
 	"https://github.com/jake-stewart/multicursor.nvim", -- multicursors
 
@@ -41,7 +40,6 @@ require("core.terminal")
 require("core.neovide")
 
 require("lsp.lspconfig")
-require("lsp.jdtls")
 
 require("plugins.nvim-tree")
 require("plugins.nvim-treesitter")
