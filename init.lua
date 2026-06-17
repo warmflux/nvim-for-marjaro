@@ -24,8 +24,8 @@ vim.pack.add({
 	"https://github.com/creativenull/efmls-configs-nvim",
 	"https://github.com/L3MON4D3/LuaSnip",
 
+	"https://github.com/OXY2DEV/markview.nvim",
 	"https://github.com/mason-org/mason.nvim", -- market
-	"https://github.com/obsidian-nvim/obsidian.nvim", -- md
 
 	"https://github.com/linux-cultist/venv-selector.nvim", -- py select venv
 	"https://github.com/jake-stewart/multicursor.nvim", -- multicursors
@@ -52,6 +52,7 @@ require("plugins.mason")
 require("plugins.venv-selector")
 require("plugins.multicursor")
 require("plugins.opencode")
+require("plugins.markview")
 
 require("ui.colorscheme")
 require("ui.statuline")

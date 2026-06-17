@@ -40,6 +40,10 @@
       "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
       "src": "https://www.github.com/lewis6991/gitsigns.nvim"
     },
+    "markview.nvim": {
+      "rev": "576e50fa99091ff47a9920e1b6ef94b2a7c2f036",
+      "src": "https://github.com/OXY2DEV/markview.nvim"
+    },
     "mason.nvim": {
       "rev": "cbf8d285e1462dd24acf3507817be2bbcb035919",
       "src": "https://github.com/mason-org/mason.nvim"
@@ -75,10 +79,6 @@
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
-    },
-    "obsidian.nvim": {
-      "rev": "896d4515a7193676aacf8a95239882397fdd6b27",
-      "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
     "oil.nvim": {
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
