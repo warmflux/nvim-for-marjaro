@@ -47,13 +47,13 @@ local function lsp_on_attach(ev)
 	local bufnr = ev.buf
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
-	vim.keymap.set("n", "<leader>gd", function()
+	vim.keymap.set("n", "gd", function()
 		require("fzf-lua").lsp_definitions({ jump1 = true })
 	end, opts)
 
-	vim.keymap.set("n", "<leader>gD", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "gD", vim.lsp.buf.definition, opts)
 
-	vim.keymap.set("n", "<leader>gS", function()
+	vim.keymap.set("n", "gS", function()
 		vim.cmd("vsplit")
 		vim.lsp.buf.definition()
 	end, opts)

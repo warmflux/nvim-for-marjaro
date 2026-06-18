@@ -32,6 +32,10 @@ vim.opt.lazyredraw = true -- do not redraw during macros
 vim.opt.synmaxcol = 300 -- syntax highlighting limit
 vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 
+-- don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth',
+-- hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode.
+vim.opt.formatoptions:remove({ "c", "r", "o" })
+
 local undodir = vim.fn.expand("~/.vim/undodir")
 if
 	vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
@@ -63,7 +67,7 @@ vim.opt.modifiable = true -- allow buffer modifications
 vim.opt.encoding = "utf-8" -- set encoding
 
 vim.opt.guicursor =
-	"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175" -- cursor blinking and settings
+	"n-v-c:block,i-ci-ve:ver20,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175" -- cursor blinking and settings
 
 -- Folding: requires treesitter available at runtime; safe fallback if not
 vim.opt.foldmethod = "expr" -- use expression for folding

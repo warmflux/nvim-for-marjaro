@@ -88,6 +88,10 @@
       "rev": "6eabb12f1afba7c19f511c95ab356ed4fa5ec60f",
       "src": "https://github.com/nickjvandyke/opencode.nvim.git"
     },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    },
     "venv-selector.nvim": {
       "rev": "a46c77978abc1aa1b3e17918d964bd30287abb42",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"

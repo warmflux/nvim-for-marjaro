@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#FFFFFF" })
-
 require("gitsigns").setup({
 	signs = {
 		add = { text = "\u{2590}" }, -- ▏

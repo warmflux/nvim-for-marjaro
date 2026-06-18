@@ -1,6 +1,9 @@
 -- vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site")
 vim.pack.add({
-	"https://github.com/catppuccin/nvim", -- colorschem
+	-- colorschem
+	"https://github.com/catppuccin/nvim",
+	"https://github.com/folke/tokyonight.nvim",
+
 	"https://www.github.com/lewis6991/gitsigns.nvim",
 	"https://www.github.com/echasnovski/mini.nvim",
 	"https://www.github.com/ibhagwan/fzf-lua", -- search

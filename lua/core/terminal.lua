@@ -1,4 +1,5 @@
-vim.api.nvim_create_autocmd("TermClose", {
+--[[
+  vim.api.nvim_create_autocmd("TermClose", {
 	group = augroup,
 	callback = function()
 		if vim.v.event.status == 0 then
@@ -84,3 +85,54 @@ vim.keymap.set("t", "<C-\\>", function()
 		terminal_state.is_open = false
 	end
 end, { noremap = true, silent = true, desc = "Close floating terminal" })
+-- ]]
+
+vim.api.nvim_create_autocmd("TermClose", {
+	group = augroup,
+	callback = function()
+		if vim.bo.buftype == "terminal" then
+			vim.bo.bufhidden = "hide"
+		end
+	end,
+})
+
+local right_terminal = {
+	win = nil,
+	buf = nil,
+}
+
+local function open_right_terminal()
+	if right_terminal.win and vim.api.nvim_win_is_valid(right_terminal.win) then
+		vim.api.nvim_set_current_win(right_terminal.win)
+		return
+	end
+
+	if not (right_terminal.buf and vim.api.nvim_buf_is_valid(right_terminal.buf)) then
+		right_terminal.buf = vim.api.nvim_create_buf(false, true)
+		vim.bo[right_terminal.buf].bufhidden = "hide"
+	end
+
+	vim.cmd("vsplit")
+	right_terminal.win = vim.api.nvim_get_current_win()
+
+	vim.api.nvim_win_set_buf(right_terminal.win, right_terminal.buf)
+
+	local lines = vim.api.nvim_buf_get_lines(right_terminal.buf, 0, -1, false)
+	local is_empty = #lines == 0 or (#lines == 1 and lines[1] == "")
+	if is_empty then
+		vim.fn.termopen("/usr/bin/fish")
+	end
+
+	vim.cmd("startinsert")
+end
+
+vim.keymap.set("n", "<C-\\>", open_right_terminal, { noremap = true, silent = true, desc = "Right Terminal" })
+
+vim.keymap.set("t", "<C-\\>", function()
+	if right_terminal.win and vim.api.nvim_win_is_valid(right_terminal.win) then
+		vim.api.nvim_win_close(right_terminal.win, false)
+	end
+end, { noremap = true, silent = true, desc = "Close Right Terminal" })
+
+-- vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
+-- vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
