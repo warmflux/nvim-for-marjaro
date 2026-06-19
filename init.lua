@@ -16,12 +16,9 @@ vim.pack.add({
 	},
 
 	-- Language Server Protocols
-	"https://www.github.com/hrsh7th/nvim-cmp",
-	"https://www.github.com/hrsh7th/cmp-nvim-lsp",
-	"https://www.github.com/hrsh7th/cmp-buffer",
-	"https://www.github.com/hrsh7th/cmp-path",
-	"https://www.github.com/hrsh7th/cmp-cmdline",
-	"https://github.com/saadparwaiz1/cmp_luasnip",
+	"https://github.com/saghen/blink.lib",
+	"https://github.com/saghen/blink.cmp",
+
 	"https://www.github.com/rafamadriz/friendly-snippets",
 	"https://www.github.com/neovim/nvim-lspconfig",
 	"https://github.com/creativenull/efmls-configs-nvim",

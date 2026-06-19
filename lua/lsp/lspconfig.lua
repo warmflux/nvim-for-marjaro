@@ -115,143 +115,49 @@ vim.api.nvim_create_autocmd("LspAttach", { group = augroup, callback = lsp_on_at
 vim.keymap.set("n", "<leader>q", function()
 	vim.diagnostic.setloclist({ open = true })
 end, { desc = "Open diagnostic list" })
+
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-
-require("luasnip.loaders.from_vscode").lazy_load()
-
+local cmp = require("blink.cmp")
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
+	keymap = {
+		preset = "none",
+		["<C-Space>"] = { "show", "hide" },
+		["<CR>"] = { "accept", "fallback" },
+		["<C-j>"] = { "select_next", "fallback" },
+		["<C-k>"] = { "select_prev", "fallback" },
+		["<Tab>"] = { "snippet_forward", "fallback" },
+		["<S-Tab>"] = { "snippet_backward", "fallback" },
+	},
+	appearance = { nerd_font_variant = "normal" },
+	completion = {
+		menu = {
+			auto_show = function()
+				return vim.bo.filetype ~= "markdown"
+			end,
+		},
+	},
+	sources = { default = { "lsp", "path", "buffer", "snippets" } },
+	snippets = {
+		expand = function(snippet)
+			require("luasnip").lsp_expand(snippet)
 		end,
 	},
-
-	mapping = cmp.mapping.preset.insert({
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
-		["<C-j>"] = cmp.mapping.select_next_item(),
-		["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			elseif vim.fn.has("nvim-0.9") == 1 and vim.fn.getline("."):sub(1, vim.fn.col(".") - 1):match("%S$") then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "buffer" },
-		{ name = "path" },
-	}),
-
-	formatting = {
-		fields = { "kind", "abbr", "menu" },
-		format = function(entry, item)
-			local kind_icons = {
-				Text = "󰉿",
-				Method = "󰆧",
-				Function = "󰊕",
-				Field = "󰜢",
-				Variable = "󰀫",
-				Class = "󰠱",
-				Interface = "",
-				Module = "",
-				Property = "󰜢",
-				Unit = "󰑭",
-				Value = "󰎠",
-				Enum = "",
-				Keyword = "󰌋",
-				Snippet = "",
-				Color = "󰏘",
-				File = "󰈙",
-				Reference = "󰈇",
-				Folder = "󰉋",
-				EnumMember = "",
-				Constant = "󰏿",
-				Struct = "󰙅",
-				Event = "",
-				Operator = "󰆕",
-				TypeParameter = "󰊄",
-			}
-			item.kind = string.format("%s %s", kind_icons[item.kind] or "", item.kind)
-			return item
-		end,
+	fuzzy = {
+		implementation = "prefer_rust_with_warning",
+		sorts = {
+			"score",
+			"sort_text",
+			"label",
+		},
 	},
-
-	window = {
-		completion = cmp.config.window.bordered({
-			winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
-			border = "rounded",
-		}),
-		documentation = cmp.config.window.bordered({
-			winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder",
-			border = "rounded",
-		}),
+	cmdline = {
+		keymap = { preset = "inherit" },
+		completion = { menu = { auto_show = true } },
 	},
 })
-
--- ============================================================================
--- 命令行补全
--- ============================================================================
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline({
-		["<Tab>"] = { c = cmp.mapping.select_next_item() },
-		["<S-Tab>"] = { c = cmp.mapping.select_prev_item() },
-		["<CR>"] = { c = cmp.mapping.confirm({ select = false }) },
-	}),
-	sources = cmp.config.sources({
-		{ name = "path" },
-		{ name = "cmdline" },
-	}),
-	window = {
-		completion = cmp.config.window.bordered({
-			winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
-			border = "rounded",
-		}),
-	},
-})
-
-cmp.setup.cmdline({ "/", "?" }, {
-	mapping = cmp.mapping.preset.cmdline({
-		["<Tab>"] = { c = cmp.mapping.select_next_item() },
-		["<S-Tab>"] = { c = cmp.mapping.select_prev_item() },
-		["<CR>"] = { c = cmp.mapping.confirm({ select = false }) },
-	}),
-	sources = {
-		{ name = "buffer" },
-	},
-	window = {
-		completion = cmp.config.window.bordered({
-			winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
-			border = "rounded",
-		}),
-	},
-})
-
--- LSP 能力
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.config["*"] = {
-	capabilities = capabilities,
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 }
 
 vim.lsp.config("lua_ls", {
