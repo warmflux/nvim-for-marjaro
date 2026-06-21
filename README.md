@@ -34,7 +34,7 @@ Modern Neovim configuration using the built-in `vim.pack.add` package manager, C
 ## Installation
 
 ```bash
-git clone https://github.com/warmflux/nvim ~/.config/nvim
+git clone https://github.com/warmflux/nvim-for-marjaro ~/.config/nvim
 nvim --headless "+Lazy! sync" +qa
 ```
 

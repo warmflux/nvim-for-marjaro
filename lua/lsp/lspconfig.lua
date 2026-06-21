@@ -119,6 +119,7 @@ end, { desc = "Open diagnostic list" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 
 local cmp = require("blink.cmp")
+cmp.build():pwait()
 cmp.setup({
 	keymap = {
 		preset = "none",
@@ -173,6 +174,29 @@ vim.lsp.config("pyright", {})
 vim.lsp.config("ts_ls", {})
 vim.lsp.config("gopls", {})
 vim.lsp.config("clangd", {})
+
+vim.lsp.config("rust_analyzer", {
+	on_attach = function(client, bufnr)
+		-- Enable inlay hints for type inference
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end,
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				buildScripts = { enable = true },
+			},
+			procMacro = {
+				enable = true,
+			},
+			completion = {
+				autoImport = { enable = true },
+			},
+			-- checkOnSave = {
+			-- 	command = "clippy",
+			-- },
+		},
+	},
+})
 
 local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
 local maven_home = os.getenv("HOME") .. "/.m2"
@@ -282,10 +306,11 @@ end
 vim.lsp.enable({
 	"lua_ls",
 	"pyright",
-	"bashls",
+	-- "bashls",
 	"ts_ls",
-	"gopls",
+	-- "gopls",
 	"jdtls",
 	"clangd",
+	"rust_analyzer",
 	"efm",
 })
